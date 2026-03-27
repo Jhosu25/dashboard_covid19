@@ -1,0 +1,78 @@
+<div class="dashboard-shell">
+  <section class="hero-card">
+    <div class="hero-copy">
+      <p class="eyebrow">Josue Parrales</p>
+      <h1>Covid-19 Dashboard</h1>
+      <p class="hero-text">
+        Interfaz para explorar charts desde Mongodb Atlas.
+      </p>
+    </div>
+
+    <div class="hero-search">
+      <label class="search-box">
+        <span class="search-icon">⌕</span>
+        <input
+          type="text"
+          placeholder="Buscar por país, categoría o título..."
+          [value]="searchTerm"
+          (input)="onSearch($event)"
+        />
+        @if (searchTerm) {
+          <button type="button" class="clear-btn" (click)="clearSearch()">Limpiar</button>
+        }
+      </label>
+
+      <div class="result-chip">
+        {{ visibleCharts.length }} gráfico{{ visibleCharts.length === 1 ? '' : 's' }} visible{{ visibleCharts.length === 1 ? '' : 's' }}
+      </div>
+    </div>
+  </section>
+
+  <section class="toolbar-card">
+    <div class="toolbar-header">
+      <div>
+        <h2>Exploración de charts</h2>
+        <p>Puedes simplificar tu busqueda.</p>
+      </div>
+    </div>
+
+    <div class="filters">
+      @for (filter of filters; track filter.key) {
+        <button
+          type="button"
+          class="filter-pill"
+          [class.active]="selectedFilter === filter.key"
+          (click)="setFilter(filter.key)">
+          {{ filter.label }}
+        </button>
+      }
+    </div>
+  </section>
+
+  @if (visibleCharts.length > 0) {
+    <section class="charts-grid">
+      @for (chart of visibleCharts; track chart.id) {
+        <article class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <span class="chart-tag">{{ chart.tag }}</span>
+              <h3>{{ chart.title }}</h3>
+              <p>{{ chart.description }}</p>
+            </div>
+          </div>
+
+          <div class="chart-frame-wrapper">
+            <iframe [src]="chart.safeUrl" [title]="chart.title"></iframe>
+          </div>
+        </article>
+      }
+    </section>
+  } @else {
+    <section class="empty-state">
+      <div class="empty-state-box">
+        <h3>No se encontraron gráficos</h3>
+        <p>Prueba con otro término de búsqueda o cambia el filtro seleccionado.</p>
+      </div>
+    </section>
+  }
+</div>
