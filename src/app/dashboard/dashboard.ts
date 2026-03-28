@@ -5,7 +5,7 @@ interface ChartItem {
   id: string;
   title: string;
   description: string;
-  category: string;
+  category: string[];
   tag: string;
 }
 
@@ -31,49 +31,49 @@ export class Dashboard {
       id: 'c70eb502-7036-4a11-8165-b74784951bfd',
       title: 'Total de casos por continente',
       description: 'Vista comparativa por región para identificar la concentración de casos.',
-      category: 'cases',
+      category: ['cases'],
       tag: 'Continentes'
     },
     {
       id: '2120cc8b-5dc7-4967-a044-36bdf905a187',
       title: 'Evolución temporal de casos',
       description: 'Comportamiento mensual para revisar tendencia y variaciones.',
-      category: 'cases',
+      category: ['cases'],
       tag: 'Tendencia'
     },
     {
       id: '26db2ab3-bdb8-4f89-83f6-ba1eb32cf96a',
-      title: 'Índice por continentes',
-      description: 'Distribución general para lectura rápida del índice global.',
-      category: 'cases',
+      title: 'Índice de mortalidad por continentes',
+      description: 'Distribución general para lectura rápida del índice global de fallecidos por continente',
+      category: [']cases'],
       tag: 'Índice'
     },
     {
       id: '1bc295bd-8924-4ddc-8199-946d6873fde4',
-      title: 'Índice de muerte por continentes',
+      title: 'Índice de mortalidad por continentes',
       description: 'Comparativa mensual de mortalidad por continente.',
-      category: 'deaths',
+      category: ['deaths'],
       tag: 'Fallecidos'
     },
     {
       id: 'd13e4139-e068-4d3f-9406-714526969251',
-      title: 'Estadísticas por país',
+      title: 'Estadísticas de vacunas por país',
       description: 'Resumen ordenado por país para análisis detallado.',
-      category: 'countries',
+      category: ['countries','vaccines'],
       tag: 'Países'
     },
     {
       id: '708b8456-230c-48b9-996c-d484d80c46e8',
-      title: 'Índice de fallecidos',
+      title: 'Índice de mortalidad en hospitales',
       description: 'Indicador hospitalario para seguimiento de fallecimientos.',
-      category: 'deaths',
+      category: ['deaths'],
       tag: 'Hospitales'
     },
     {
       id: '803b8802-cc42-4c67-9066-ed0611c6d9bb',
       title: 'Tabla estadística de vacuna',
       description: 'Vista de vacunación por país para seguimiento del avance.',
-      category: 'vaccines',
+      category: ['vaccines'],
       tag: 'Vacunas'
     }
   ];
@@ -116,7 +116,7 @@ export class Dashboard {
 
     this.visibleCharts = this.chartsCatalog
       .filter((chart) => !!chart.id)
-      .filter((chart) => this.selectedFilter === 'all' || chart.category === this.selectedFilter)
+      .filter((chart) => this.selectedFilter === 'all' || chart.category.includes(this.selectedFilter))
       .filter((chart) => {
         if (!term) return true;
 
