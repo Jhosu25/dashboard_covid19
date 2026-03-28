@@ -75,6 +75,13 @@ export class Dashboard {
       description: 'Vista de vacunación por país para seguimiento del avance.',
       category: ['vaccines'],
       tag: 'Vacunas'
+    },
+    {
+      id: 'a11739e7-bd58-41ad-b4de-db0fc4c35b71',
+      title: 'Tabla estadística de Recuperación',
+      description: 'Vista de recuperación por país para seguimiento del avance.',
+      category: ['recuperation'],
+      tag: 'Recuperación'
     }
   ];
 
@@ -83,7 +90,8 @@ export class Dashboard {
     { key: 'cases', label: 'Casos' },
     { key: 'deaths', label: 'Fallecidos' },
     { key: 'countries', label: 'Países' },
-    { key: 'vaccines', label: 'Vacunas' }
+    { key: 'vaccines', label: 'Vacunas' },
+    { key: 'recuperation', label: 'Recuperación' }
   ];
 
   constructor(private sanitizer: DomSanitizer) {
